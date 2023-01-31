@@ -14,7 +14,7 @@
       </a>
       <p
         class="mb-3 font-normal text-gray-700 dark:text-gray-400"
-        v-html="story.content"
+        v-html="story.story"
       ></p>
       <dd
         class="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5 m-3"
@@ -24,7 +24,12 @@
           :alt="element.name"
           class="w-6 h-6 rounded-full bg-slate-100 ring-2 ring-white"
           loading="lazy"
-          v-for="element in story.elements"
+          v-for="element in [
+            ...story.locations,
+            ...story.items,
+            ...story.characters,
+          ]"
+          :key="element.name"
         />
       </dd>
     </div>
@@ -34,6 +39,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
+import type { Story } from "@/types";
 import { useMainStore } from "../store";
 import StoryDetailPagination from "./StoryDetailPagination.vue";
 
@@ -41,9 +47,11 @@ const props = defineProps({
   title: String,
 });
 
-const story = reactive({
-  content: "",
-  elements: [],
+const story: Story = reactive({
+  story: "",
+  characters: [],
+  locations: [],
+  items: [],
 });
 
 const id = Number(window.location.toString().split("/").reverse()[0]);
@@ -55,15 +63,12 @@ onMounted(async () => {
 
   totalStories.value = mainStore.getStories.length;
 
-  const response = await mainStore.getStory(id);
+  const response = mainStore.getStory(id);
 
-  story.content = response.story;
-
-  story.elements = [
-    ...response.characters,
-    ...response.locations,
-    ...response.items,
-  ];
+  story.story = response.story;
+  story.characters = response.characters;
+  story.locations = response.locations;
+  story.items = response.items;
 });
 </script>
 

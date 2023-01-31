@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { computed, onMounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
+import router from "@/router";
 
+const isHome = computed(() => router.currentRoute.value.name === "home");
 onMounted(() => {
   const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
   const themeToggleLightIcon = document.getElementById(
@@ -59,6 +61,7 @@ onMounted(() => {
         href="/"
         class="text-xl lg:text-2xl font-extrabold text-gray-900 dark:text-white"
         id="logo"
+        :class="{ hidden: isHome }"
       >
         <span
           class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"

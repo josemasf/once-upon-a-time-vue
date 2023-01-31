@@ -8,6 +8,7 @@
       :story="story.story"
       :id="index"
       @open-story="openStoryHandler"
+      :key="index"
     >
       <div
         v-html="story.story"
@@ -30,7 +31,7 @@
           <div>
             <div class="p-3 flex-auto justify-center leading-6">
               <div
-                class="mb-4 text-lg text-2xl text-gray-500 dark:text-gray-400 overflow-x-auto max-h-screen"
+                class="mb-4 text-lg text-gray-500 dark:text-gray-400 overflow-x-auto max-h-screen"
               >
                 <div v-html="story"></div>
               </div>
@@ -56,14 +57,14 @@
 </template>
 
 <script setup lang="ts">
-import { StoryCard } from ".";
+import { StoryCard } from "@/components";
 
-import { useMainStore } from "../store";
+import { useMainStore } from "@/store";
 import { ref } from "vue";
 
 const mainStore = useMainStore();
 
-const openStoryHandler = (payload) => {
+const openStoryHandler = (payload: any) => {
   story.value = payload;
   isModalVisible.value = true;
 };

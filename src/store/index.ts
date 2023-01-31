@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
+import { reactive } from "vue";
+import type { Story } from "@/types";
 
-export const useMainStore = defineStore({
-  id: "main",
-  state: () => ({
-    characteres: useStorage("characteres", [
+export const useMainStore = defineStore("main", () => {
+  const characteres = reactive(
+    useStorage("characteres", [
       { name: "boy", active: false },
       { name: "cowboy", active: false },
       { name: "dog", active: false },
@@ -17,8 +18,10 @@ export const useMainStore = defineStore({
       { name: "monkey", active: false },
       { name: "thief", active: false },
       { name: "villain", active: false },
-    ]),
-    places: useStorage("places", [
+    ])
+  );
+  const places = reactive(
+    useStorage("places", [
       { name: "paris", active: false },
       { name: "japan", active: false },
       { name: "village", active: false },
@@ -26,50 +29,82 @@ export const useMainStore = defineStore({
       { name: "planet", active: false },
       { name: "river", active: false },
       { name: "countryside", active: false },
-    ]),
-    items: useStorage("items", [
+    ])
+  );
+  const items = reactive(
+    useStorage("items", [
       { name: "treasure", active: false },
       { name: "magic-stone", active: false },
-    ]),
-    stories: useStorage("stories", []),
-  }),
-  getters: {
-    getCharacters: (state) => state.characteres,
-    getCharactersActived: (state) =>
-      state.characteres.filter((character) => character.active),
-    getPlaces: (state) => state.places,
-    getPlacesActived: (state) =>
-      state.places.filter((location) => location.active),
-    getItems: (state) => state.items,
-    getItemsActived: (state) => state.items.filter((items) => items.active),
-    getStories: (state) => state.stories,
-  },
-  actions: {
-    toggleCharacter(character) {
-      const status = this.characteres.find(
-        (char) => char.name === character.name
-      ).active;
+    ])
+  );
 
-      this.characteres.find((char) => char.name === character.name).active =
-        !status;
-    },
-    toggleLocation(item) {
-      const status = this.places.find(
-        (place) => place.name === item.name
-      ).active;
+  const stories = reactive(useStorage("stories", [] as Array<Story>));
 
-      this.places.find((place) => place.name === item.name).active = !status;
-    },
-    toggleItems(item) {
-      const status = this.items.find((it) => it.name === item.name).active;
+  const getCharacters = () => characteres;
+  const getCharactersActived = () =>
+    characteres.value.filter((character) => character.active);
 
-      this.items.find((it) => it.name === item.name).active = !status;
-    },
-    saveStory(story) {
-      this.stories.push(story);
-    },
-    getStory(id) {
-      return this.stories[id];
-    },
-  },
+  const getPlaces = () => places;
+  const getPlacesActived = () =>
+    places.value.filter((location) => location.active);
+  const getItems = () => items;
+  const getItemsActived = () => items.value.filter((items) => items.active);
+  const getStories = () => stories;
+
+  const toggleCharacter = (character: { name: string }) => {
+    const characterInfo = characteres.value.find(
+      (char) => char.name === character.name
+    );
+
+    if (characterInfo) {
+      const status = characterInfo.active;
+
+      characterInfo.active = !status;
+    }
+  };
+  const toggleLocation = (item: { name: string }) => {
+    const placeInfo = places.value.find((place) => place.name === item.name);
+
+    if (placeInfo) {
+      const status = placeInfo.active;
+
+      placeInfo.active = !status;
+    }
+  };
+
+  const toggleItems = (item: { name: string }) => {
+    const itemInfo = items.value.find((it) => it.name === item.name);
+
+    if (itemInfo) {
+      const status = itemInfo.active;
+
+      itemInfo.active = !status;
+    }
+  };
+
+  const saveStory = (story: never) => {
+    stories.value.push(story);
+  };
+
+  const getStory = (id: number) => {
+    return stories.value[id];
+  };
+
+  return {
+    characteres,
+    items,
+    places,
+    getCharacters,
+    getCharactersActived,
+    getPlaces,
+    getPlacesActived,
+    getItems,
+    getItemsActived,
+    getStories,
+    toggleCharacter,
+    toggleItems,
+    toggleLocation,
+    saveStory,
+    getStory,
+  };
 });

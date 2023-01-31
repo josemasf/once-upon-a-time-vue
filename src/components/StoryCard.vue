@@ -21,6 +21,7 @@
         class="w-6 h-6 rounded-full bg-slate-100 ring-2 ring-white"
         loading="lazy"
         v-for="element in elements"
+        :key="element.name"
       />
     </dd>
     <a
@@ -52,12 +53,6 @@ const props = defineProps({
   id: Number,
   elements: Array<{ name: string; active: boolean }>,
 });
-
-const emits = defineEmits(["open-story"]);
-
-const clickHandler = (payload) => {
-  emits("open-story", payload);
-};
 </script>
 
 <style>

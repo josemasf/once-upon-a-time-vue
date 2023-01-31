@@ -17,7 +17,7 @@
       class="pointer-none w-80 text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-2xl px-5 py-2.5 text-center mr-2 mb-2"
     >
       Our Oompa Loompas are creating an amazing story...
-      <Oompa />
+      <OompaIcon />
     </button>
   </div>
 </template>
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { storyGenerator } from "../services/ai";
-import { Oompa } from "./Atom/";
+import { OompaIcon } from "./Atom/";
 
 import { useMainStore } from "../store";
 
@@ -44,11 +44,11 @@ const handleClick = async () => {
       index % 2 !== 0 ? ` with ${character.name} ` : ` ${character.name} `;
   });
 
-  mainStore.getPlacesActived.forEach((place, index) => {
+  mainStore.getPlacesActived.forEach((place) => {
     places += ` and use this locations  ${place.name} `;
   });
 
-  mainStore.getItemsActived.forEach((items, index) => {
+  mainStore.getItemsActived.forEach((items) => {
     places += ` and in the story someone have a ${items.name} `;
   });
 

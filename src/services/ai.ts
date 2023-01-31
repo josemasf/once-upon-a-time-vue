@@ -1,4 +1,4 @@
-const COHERE_API_KEY = import.meta.env.PUBLIC_COHERE_API_KEY;
+const COHERE_API_KEY = import.meta.env.VITE_COHERE_API_KEY;
 const COHERE_API_GENERATE_URL = "https://api.cohere.ai/generate";
 
 export async function storyGenerator(
@@ -32,23 +32,23 @@ export async function storyGenerator(
   return formatStory(text);
 }
 
-function formatStory(text) {
-  let textFormat = text
-    .substr(text.search(/once/i), text.length)
+function formatStory(text: string) {
+  const textFormat = text
+    .slice(text.search(/once/i), text.length)
     .replaceAll("\n\n", "\n")
     .replaceAll("\n", "---")
     .replace("---", "");
 
   let textParra = "";
 
-  textFormat.split("---").forEach((p) => (textParra += `<p>${p}</p>`));
+  textFormat.split("---").forEach((p: string) => (textParra += `<p>${p}</p>`));
 
   if (!textParra.startsWith("<p>")) textParra = "<p>" + textParra;
 
   return textParra;
 }
 
-export async function titleGenerator(input) {
+export async function titleGenerator(input: string) {
   const data = {
     model: "command-xlarge-20221108",
     prompt: `${input}`,

@@ -1,6 +1,6 @@
-import Loading from "./Loading.vue";
-import Oompa from "./Oompa.vue";
-import Upload from "./Upload.vue";
+import TheLoading from "./TheLoading.vue";
+import OompaIcon from "./OompaIcon.vue";
+import TheUpload from "./TheUpload.vue";
 
-export { Loading, Oompa, Upload };
+export { TheLoading, OompaIcon, TheUpload };
 export default {};
