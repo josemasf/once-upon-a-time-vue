@@ -28,6 +28,7 @@ import { storyGenerator } from "../services/ai";
 import { OompaIcon } from "./Atom/";
 
 import { useMainStore } from "../store";
+import type { Story } from "@/types";
 
 const emit = defineEmits(["new-story"]);
 
@@ -39,16 +40,16 @@ const handleClick = async () => {
   let characters = "";
   let places = "";
 
-  mainStore.getCharactersActived.forEach((character, index) => {
+  mainStore.getCharactersActived().forEach((character, index) => {
     characters +=
       index % 2 !== 0 ? ` with ${character.name} ` : ` ${character.name} `;
   });
 
-  mainStore.getPlacesActived.forEach((place) => {
+  mainStore.getPlacesActived().forEach((place) => {
     places += ` and use this locations  ${place.name} `;
   });
 
-  mainStore.getItemsActived.forEach((items) => {
+  mainStore.getItemsActived().forEach((items) => {
     places += ` and in the story someone have a ${items.name} `;
   });
 
@@ -64,10 +65,11 @@ const handleClick = async () => {
 
   mainStore.saveStory({
     story,
-    characters: mainStore.getCharactersActived,
-    locations: mainStore.getPlacesActived,
-    items: mainStore.getItemsActived,
+    characters: mainStore.getCharactersActived(),
+    locations: mainStore.getPlacesActived(),
+    items: mainStore.getItemsActived(),
   });
+
   isLoading.value = false;
 
   emit("new-story", story);

@@ -59,7 +59,8 @@ const previous = computed(() => {
   else return `/bookstore/${id.value}`;
 });
 const next = computed(() => {
-  if (id.value + 1 < props.totalPages) return `/bookstore/${id.value + 1}`;
+  if (props.totalPages && id.value + 1 < props.totalPages)
+    return `/bookstore/${id.value + 1}`;
   else return `/bookstore/${id.value}`;
 });
 </script>

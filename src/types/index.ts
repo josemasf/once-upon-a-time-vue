@@ -13,3 +13,18 @@ export interface Story {
     active: boolean;
   }[];
 }
+
+export interface Character {
+  name: string;
+  active: boolean;
+}
+
+export interface Location {
+  name: string;
+  active: boolean;
+}
+
+export interface Item {
+  name: string;
+  active: boolean;
+}

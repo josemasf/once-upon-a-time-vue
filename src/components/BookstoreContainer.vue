@@ -3,7 +3,7 @@
     class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center"
   >
     <StoryCard
-      v-for="(story, index) in mainStore.getStories"
+      v-for="(story, index) in mainStore.getStories().value"
       :elements="[...story.characters, ...story.locations, ...story.items]"
       :story="story.story"
       :id="index"

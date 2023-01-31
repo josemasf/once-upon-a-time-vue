@@ -4,7 +4,7 @@
       :src="`/imgs/${character.name}.png`"
       :alt="character.name"
       :active="character.active"
-      v-for="character in mainStore.getCharacters"
+      v-for="character in mainStore.getCharacters().value"
       :key="character.name"
       @click="clickHandler(character)"
     />

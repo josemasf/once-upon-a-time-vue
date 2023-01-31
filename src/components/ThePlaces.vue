@@ -4,7 +4,7 @@
       :src="`/imgs/${place.name}.png`"
       :alt="place.name"
       :active="place.active"
-      v-for="place in mainStore.getPlaces"
+      v-for="place in mainStore.getPlaces().value"
       @click="clickHandler(place)"
       :key="place.name"
     />

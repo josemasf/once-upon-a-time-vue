@@ -4,7 +4,7 @@
       :src="`/imgs/${item.name}.png`"
       :alt="item.name"
       :active="item.active"
-      v-for="item in mainStore.getItems"
+      v-for="item in mainStore.getItems().value"
       @click="clickHandler(item)"
       :key="item.name"
     />
@@ -16,10 +16,11 @@ import AtomAvatar from "./Atom/AtomAvatar.vue";
 import SelectableContainer from "./SelectableContainer.vue";
 
 import { useMainStore } from "../store";
+import type { Item } from "@/types";
 
 const mainStore = useMainStore();
 
-const clickHandler = (item: any) => {
+const clickHandler = (item: Item) => {
   mainStore.toggleItems(item);
 };
 </script>

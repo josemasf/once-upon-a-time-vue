@@ -82,7 +82,7 @@ export const useMainStore = defineStore("main", () => {
     }
   };
 
-  const saveStory = (story: never) => {
+  const saveStory = (story: Story) => {
     stories.value.push(story);
   };
 
