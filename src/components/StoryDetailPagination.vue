@@ -4,11 +4,11 @@
       >Page {{ props.currentPage }} of {{ props.totalPages }}</span
     >
     <div class="space-x-1">
-      <a
+      <RouterLink
         title="previous"
         type="button"
         class="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow"
-        :href="previous"
+        :to="previous"
       >
         <svg
           viewBox="0 0 24 24"
@@ -21,7 +21,8 @@
         >
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
-      </a>
+      </RouterLink>
+
       <a
         title="next"
         type="button"

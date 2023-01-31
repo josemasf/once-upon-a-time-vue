@@ -42,6 +42,7 @@ import { onMounted, reactive, ref } from "vue";
 import type { Story } from "@/types";
 import { useMainStore } from "../store";
 import StoryDetailPagination from "./StoryDetailPagination.vue";
+import router from "@/router";
 
 const props = defineProps({
   title: String,
@@ -54,7 +55,7 @@ const story: Story = reactive({
   items: [],
 });
 
-const id = Number(window.location.toString().split("/").reverse()[0]);
+const id = Number(router.currentRoute.value.params.id);
 
 const totalStories = ref();
 

@@ -12,18 +12,18 @@ const router = createRouter({
     {
       path: "/bookstore",
       name: "bookstore",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+
       component: () => import("../views/BookstoreView.vue"),
     },
     {
       path: "/bookstore/:id",
       name: "bookstore-detail",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import("../views/BookstoreDetailView.vue"),
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () => import("../views/NotFoundView.vue"),
     },
   ],
 });
