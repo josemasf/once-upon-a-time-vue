@@ -8,6 +8,7 @@ import SelectableContainer from "./SelectableContainer.vue";
 import StoriesGenerator from "./StoriesGenerator.vue";
 import StoryCard from "./StoryCard.vue";
 import StoryModal from "./StoryModal.vue";
+import StoryDetail from "./StoryDetail.vue";
 import BookstoreContainer from "./BookstoreContainer.vue";
 
 export {
@@ -20,4 +21,5 @@ export {
   StoryCard,
   BookstoreContainer,
   StoryModal,
+  StoryDetail,
 };

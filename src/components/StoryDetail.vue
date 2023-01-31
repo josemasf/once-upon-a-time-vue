@@ -61,7 +61,7 @@ const totalStories = ref();
 onMounted(async () => {
   const mainStore = useMainStore();
 
-  totalStories.value = mainStore.getStories.length;
+  totalStories.value = mainStore.getStories().value.length;
 
   const response = mainStore.getStory(id);
 
