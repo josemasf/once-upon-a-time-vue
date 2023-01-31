@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { Story } from "@/types";
 import { useMainStore } from "../store";
 import StoryDetailPagination from "./StoryDetailPagination.vue";
@@ -55,16 +55,24 @@ const story: Story = reactive({
   items: [],
 });
 
-const id = Number(router.currentRoute.value.params.id);
-
 const totalStories = ref();
 
-onMounted(async () => {
-  const mainStore = useMainStore();
+const id = computed(() => Number(router.currentRoute.value.params.id));
+const mainStore = useMainStore();
 
+onMounted(async () => {
   totalStories.value = mainStore.getStories().value.length;
 
-  const response = mainStore.getStory(id);
+  const response = mainStore.getStory(id.value);
+
+  story.story = response.story;
+  story.characters = response.characters;
+  story.locations = response.locations;
+  story.items = response.items;
+});
+
+watch(id, (newId) => {
+  const response = mainStore.getStory(newId);
 
   story.story = response.story;
   story.characters = response.characters;

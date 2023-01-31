@@ -4,7 +4,7 @@
       >Page {{ props.currentPage }} of {{ props.totalPages }}</span
     >
     <div class="space-x-1">
-      <RouterLink
+      <router-link
         title="previous"
         type="button"
         class="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow"
@@ -21,13 +21,13 @@
         >
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
-      </RouterLink>
+      </router-link>
 
-      <a
+      <router-link
         title="next"
         type="button"
         class="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow"
-        :href="next"
+        :to="next"
       >
         <svg
           viewBox="0 0 24 24"
@@ -40,13 +40,14 @@
         >
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import router from "@/router";
 
 const props = defineProps({
   currentPage: Number,
