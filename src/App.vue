@@ -65,7 +65,7 @@ onMounted(() => {
       >
         <span
           class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
-          >Once upon atime</span
+          >Once upon a time</span
         >
         a story.
       </a>
@@ -85,7 +85,7 @@ onMounted(() => {
           </li>
           <li>
             <button
-              name="toggle dark and light theme"
+              title="toggle dark and light theme"
               id="theme-toggle"
               type="button"
               class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
