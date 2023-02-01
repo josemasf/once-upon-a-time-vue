@@ -12,10 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import AtomAvatar from "./Atom/AtomAvatar.vue";
-import SelectableContainer from "./SelectableContainer.vue";
+import { AtomAvatar, SelectableContainer } from "@/components";
 
-import { useMainStore } from "../store";
+import { useMainStore } from "@/store";
 import type { Item } from "@/types";
 
 const mainStore = useMainStore();

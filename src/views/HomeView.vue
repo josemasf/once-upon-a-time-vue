@@ -3,7 +3,7 @@ import {
   TheCharacters,
   ThePlaces,
   TheItems,
-  StoriesGenerator,
+  StoriesGeneratorContainer,
 } from "../components";
 </script>
 
@@ -27,7 +27,7 @@ import {
       <TheItems />
 
       <div class="flex spac-x-2 justify-center fixed bottom-5 right-10">
-        <StoriesGenerator />
+        <StoriesGeneratorContainer />
       </div>
     </div>
   </main>

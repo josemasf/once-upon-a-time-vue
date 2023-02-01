@@ -3,16 +3,16 @@
     <AtomButton @click="handleClick" v-if="!isLoading">
       Generate a story
     </AtomButton>
-    <MoleculeButtonOompa v-else />
+    <ButtonOompa v-else />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { storyGenerator } from "../services/ai";
-import { MoleculeButtonOompa, AtomButton } from "@/components";
+import { storyGenerator } from "@/services/ai";
+import { ButtonOompa, AtomButton } from "@/components";
 
-import { useMainStore } from "../store";
+import { useMainStore } from "../../store";
 
 const emit = defineEmits(["new-story"]);
 

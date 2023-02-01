@@ -51,8 +51,8 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { Story } from "@/types";
-import { useMainStore } from "../store";
-import StoryDetailPagination from "./StoryDetailPagination.vue";
+import { useMainStore } from "@/store";
+import { StoryDetailPagination } from "@/components";
 import { useRoute } from "vue-router";
 
 import { titleGenerator } from "@/services/ai";
