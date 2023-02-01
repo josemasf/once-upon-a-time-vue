@@ -16,7 +16,7 @@ import {
         >
           <span
             class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
-            >One upon a time</span
+            >Once upon atime</span
           >
           a story.
         </h1>
