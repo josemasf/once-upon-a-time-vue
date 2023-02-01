@@ -1,6 +1,6 @@
 <template>
   <img
-    class="rounded w-36 h-36 transition-all duration-300 rounded-lg cursor-pointer filter grayscale hover:grayscale-0"
+    class="w-[100px] h-[100px] transition-all duration-300 rounded-lg cursor-pointer filter grayscale hover:grayscale-0"
     :src="props.src"
     :alt="props.name"
     :class="{ 'grayscale-0 border-4 border-yellow-500/75': props.active }"
