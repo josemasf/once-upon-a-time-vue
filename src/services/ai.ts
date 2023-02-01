@@ -74,5 +74,5 @@ export async function titleGenerator(input: string) {
 
   const { text } = response.generations[0];
 
-  return text;
+  return text.replaceAll('"', "");
 }

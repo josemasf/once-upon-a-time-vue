@@ -19,10 +19,10 @@
         </div>
       </a>
 
-      <p
-        class="mb-3 font-normal text-gray-700 dark:text-gray-400"
+      <div
+        class="mb-3 font-normal text-gray-700 dark:text-gray-400 content-story"
         v-html="story.story"
-      ></p>
+      ></div>
       <dd
         class="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5 m-3"
       >
@@ -105,13 +105,12 @@ const createTitle = async () => {
     `give me a short title for this story " ${story.story}"`
   );
 
-  mainStore.setStories(id.value, story);
+  mainStore.setStories(Number(router.params.id), story);
 };
 </script>
 
-<style>
-p {
-  margin: 5px auto;
-  font-size: 1.2em;
+<style scoped>
+.content-story :deep(p) {
+  margin: 15px auto;
 }
 </style>
