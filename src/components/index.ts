@@ -1,4 +1,5 @@
 export * from "./Atom";
+export * from "./Molecules";
 
 import ButtonGenerator from "./ButtonGenerator.vue";
 import TheCharacters from "./TheCharacters.vue";
