@@ -1,7 +1,7 @@
 <template>
   <SelectableContainer :title="'Characters'">
     <AtomAvatar
-      :src="`/imgs/${character.name}.png`"
+      :src="`/imgs/${character.name}.webp`"
       :alt="character.name"
       :active="character.active"
       v-for="character in mainStore.getCharacters().value"

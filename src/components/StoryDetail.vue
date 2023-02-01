@@ -27,7 +27,7 @@
         class="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5 m-3"
       >
         <img
-          :src="`/imgs/${element.name}.png`"
+          :src="`/imgs/${element.name}.webp`"
           :alt="element.name"
           class="w-6 h-6 rounded-full bg-slate-100 ring-2 ring-white"
           loading="lazy"
