@@ -44,6 +44,7 @@
   <StoryDetailPagination
     :current-page="currentPage"
     :total-pages="totalStories"
+    @page-changed="pageChangedHandler"
   />
 </template>
 
@@ -52,7 +53,8 @@ import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { Story } from "@/types";
 import { useMainStore } from "../store";
 import StoryDetailPagination from "./StoryDetailPagination.vue";
-import router from "@/router";
+import { useRoute } from "vue-router";
+
 import { titleGenerator } from "@/services/ai";
 
 const story: Story = reactive({
@@ -61,7 +63,10 @@ const story: Story = reactive({
   locations: [],
   items: [],
 });
-const id = computed(() => Number(router.currentRoute.value.params.id));
+
+const router = useRoute();
+
+const id = computed(() => Number(router.params.id));
 const totalStories = ref();
 const currentPage = ref(id.value + 1);
 
@@ -92,7 +97,9 @@ watch(id, (newId) => {
 
   if (!story.title) createTitle();
 });
-
+const pageChangedHandler = (payload: number) => {
+  currentPage.value = payload;
+};
 const createTitle = async () => {
   story.title = await titleGenerator(
     `give me a short title for this story " ${story.story}"`

@@ -44,7 +44,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
 
 const props = defineProps({
   currentPage: Number,
@@ -53,19 +54,20 @@ const props = defineProps({
 
 const currentPage = computed(() => props.currentPage);
 
-const id = ref(Number(window.location.toString().split("/").reverse()[0]));
+const router = useRoute();
 
-watch(window.location, (newId) => {
-  id.value = Number(newId.toString().split("/").reverse()[0]);
-});
+const emits = defineEmits(["page-changed"]);
 
 const previous = computed(() => {
-  if (id.value - 1 >= 0) return `/bookstore/${id.value - 1}`;
-  else return `/bookstore/${id.value}`;
+  if (Number(router.params.id) - 1 >= 0) {
+    emits("page-changed", Number(router.params.id) - 1);
+    return `/bookstore/${Number(router.params.id) - 1}`;
+  } else return `/bookstore/${Number(router.params.id)}`;
 });
 const next = computed(() => {
-  if (props.totalPages && id.value + 1 < props.totalPages)
-    return `/bookstore/${id.value + 1}`;
-  else return `/bookstore/${id.value}`;
+  if (props.totalPages && Number(router.params.id) < props.totalPages) {
+    emits("page-changed", Number(router.params.id) + 1);
+    return `/bookstore/${Number(router.params.id) + 1}`;
+  } else return `/bookstore/${Number(router.params.id)}`;
 });
 </script>
