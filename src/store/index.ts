@@ -50,6 +50,9 @@ export const useMainStore = defineStore("main", () => {
   const getItems = () => items;
   const getItemsActived = () => items.value.filter((items) => items.active);
   const getStories = () => stories;
+  const setStories = (id: number, story: Story) => {
+    stories.value[id] = story;
+  };
 
   const toggleCharacter = (character: { name: string }) => {
     const characterInfo = characteres.value.find(
@@ -106,5 +109,6 @@ export const useMainStore = defineStore("main", () => {
     toggleLocation,
     saveStory,
     getStory,
+    setStories,
   };
 });

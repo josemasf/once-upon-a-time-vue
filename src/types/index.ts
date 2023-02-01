@@ -1,4 +1,5 @@
 export interface Story {
+  title?: string;
   story: string;
   characters: {
     name: string;

@@ -5,13 +5,20 @@
     <div
       class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
-      <a href="#" v-if="props.title">
+      <a href="#">
         <h5
           class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          v-if="story.title"
         >
-          {{ props.title }}
+          {{ story.title }}
         </h5>
+        <div class="m-8 rounded w-2/3 animate-pulse h-32" v-else>
+          <div class="px-4 py-8 dark:bg-gray-900">
+            <div class="w-full h-6 rounded dark:bg-gray-700"></div>
+          </div>
+        </div>
       </a>
+
       <p
         class="mb-3 font-normal text-gray-700 dark:text-gray-400"
         v-html="story.story"
@@ -20,7 +27,7 @@
         class="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5 m-3"
       >
         <img
-          :src="`.././imgs/${element.name}.png`"
+          :src="`/imgs/${element.name}.png`"
           :alt="element.name"
           class="w-6 h-6 rounded-full bg-slate-100 ring-2 ring-white"
           loading="lazy"
@@ -34,7 +41,10 @@
       </dd>
     </div>
   </article>
-  <StoryDetailPagination :current-page="id + 1" :total-pages="totalStories" />
+  <StoryDetailPagination
+    :current-page="currentPage"
+    :total-pages="totalStories"
+  />
 </template>
 
 <script setup lang="ts">
@@ -43,10 +53,7 @@ import type { Story } from "@/types";
 import { useMainStore } from "../store";
 import StoryDetailPagination from "./StoryDetailPagination.vue";
 import router from "@/router";
-
-const props = defineProps({
-  title: String,
-});
+import { titleGenerator } from "@/services/ai";
 
 const story: Story = reactive({
   story: "",
@@ -54,10 +61,10 @@ const story: Story = reactive({
   locations: [],
   items: [],
 });
-
-const totalStories = ref();
-
 const id = computed(() => Number(router.currentRoute.value.params.id));
+const totalStories = ref();
+const currentPage = ref(id.value + 1);
+
 const mainStore = useMainStore();
 
 onMounted(async () => {
@@ -69,6 +76,7 @@ onMounted(async () => {
   story.characters = response.characters;
   story.locations = response.locations;
   story.items = response.items;
+  if (!story.title) createTitle();
 });
 
 watch(id, (newId) => {
@@ -78,7 +86,20 @@ watch(id, (newId) => {
   story.characters = response.characters;
   story.locations = response.locations;
   story.items = response.items;
+  story.title = response.title;
+
+  currentPage.value = id.value + 1;
+
+  if (!story.title) createTitle();
 });
+
+const createTitle = async () => {
+  story.title = await titleGenerator(
+    `give me a short title for this story " ${story.story}"`
+  );
+
+  mainStore.setStories(id.value, story);
+};
 </script>
 
 <style>

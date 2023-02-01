@@ -1,8 +1,6 @@
 <template>
   <div class="items-center space-y-2 text-xs sm:space-y-0 sm:space-x-3 sm:flex">
-    <span class="block"
-      >Page {{ props.currentPage }} of {{ props.totalPages }}</span
-    >
+    <span class="block">Page {{ currentPage }} of {{ props.totalPages }}</span>
     <div class="space-x-1">
       <router-link
         title="previous"
@@ -46,15 +44,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import router from "@/router";
+import { computed, ref, watch } from "vue";
 
 const props = defineProps({
   currentPage: Number,
   totalPages: Number,
 });
 
+const currentPage = computed(() => props.currentPage);
+
 const id = ref(Number(window.location.toString().split("/").reverse()[0]));
+
+watch(window.location, (newId) => {
+  id.value = Number(newId.toString().split("/").reverse()[0]);
+});
 
 const previous = computed(() => {
   if (id.value - 1 >= 0) return `/bookstore/${id.value - 1}`;

@@ -15,7 +15,7 @@
         <div>
           <div class="p-3 flex-auto justify-center leading-6">
             <div
-              class="mb-4 text-lg text-2xl text-gray-500 dark:text-gray-400 overflow-x-auto max-h-screen"
+              class="mb-4 text-lg text-gray-500 dark:text-gray-400 overflow-x-auto max-h-screen"
             >
               <div v-html="story"></div>
             </div>
@@ -42,12 +42,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import ButtonGenerator from "./ButtonGenerator.vue";
+import { useMainStore } from "../store";
+import router from "@/router";
 
 const isModalVisible = ref(false);
 const story = ref();
 
-const newStoryHandler = (payload: any) => {
-  isModalVisible.value = true;
+const newStoryHandler = (payload: string) => {
+  const mainStore = useMainStore();
+
+  router.push(`/bookstore/${mainStore.getStories().value.length - 1}`);
+  //isModalVisible.value = true;
 
   story.value = payload;
 };
