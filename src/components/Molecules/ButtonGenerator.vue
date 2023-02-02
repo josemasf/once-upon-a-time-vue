@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AtomButton @click="handleClick" v-if="!isLoading">
+    <AtomButton @click.once="handleClick" v-if="!isLoading">
       Generate a story
     </AtomButton>
     <ButtonOompa v-else />
@@ -12,11 +12,12 @@ import { ref } from "vue";
 import { storyGenerator } from "@/services/ai";
 import { ButtonOompa, AtomButton } from "@/components";
 
-import { useMainStore } from "../../store";
+import { useMainStore } from "@/store";
 
 const emit = defineEmits(["new-story"]);
 
 const isLoading = ref(false);
+const isGenerating = ref(false);
 
 const mainStore = useMainStore();
 
@@ -43,19 +44,21 @@ const handleClick = async () => {
     places;
 
   isLoading.value = true;
-  const value = await storyGenerator(text);
 
-  const story = value;
+  if (!isGenerating.value) {
+    isGenerating.value = true;
+    const story = await storyGenerator(text);
 
-  mainStore.saveStory({
-    story,
-    characters: mainStore.getCharactersActived(),
-    locations: mainStore.getPlacesActived(),
-    items: mainStore.getItemsActived(),
-  });
+    mainStore.saveStory({
+      story,
+      characters: mainStore.getCharactersActived(),
+      locations: mainStore.getPlacesActived(),
+      items: mainStore.getItemsActived(),
+    });
 
-  isLoading.value = false;
+    isLoading.value = false;
 
-  emit("new-story", story);
+    emit("new-story", story);
+  }
 };
 </script>

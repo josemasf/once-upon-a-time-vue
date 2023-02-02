@@ -75,17 +75,15 @@ const mainStore = useMainStore();
 onMounted(async () => {
   totalStories.value = mainStore.getStories().value.length;
 
-  const response = mainStore.getStory(id.value);
-
-  story.story = response.story;
-  story.characters = response.characters;
-  story.locations = response.locations;
-  story.items = response.items;
-  if (!story.title) createTitle();
+  setStory(id.value);
 });
 
 watch(id, (newId) => {
-  const response = mainStore.getStory(newId);
+  setStory(newId);
+});
+
+const setStory = (id: number) => {
+  const response = mainStore.getStory(id);
 
   story.story = response.story;
   story.characters = response.characters;
@@ -93,10 +91,8 @@ watch(id, (newId) => {
   story.items = response.items;
   story.title = response.title;
 
-  currentPage.value = id.value + 1;
-
   if (!story.title) createTitle();
-});
+};
 const pageChangedHandler = (payload: number) => {
   currentPage.value = payload;
 };
