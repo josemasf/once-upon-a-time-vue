@@ -23,13 +23,17 @@ const mainStore = useMainStore();
       v-else
       class="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]"
     >
-      <h1 class="text-9xl font-extrabold text-white tracking-widest">
+      <h1
+        class="text-5xl md:text-9xl font-extrabold text-white tracking-widest"
+      >
         bookstore
       </h1>
-      <div class="bg-[#FF6A3D] px-2 text-3xl rounded rotate-12 absolute">
+      <div
+        class="bg-[#FF6A3D] px-2 text-xl md:text-3xl rounded rotate-12 absolute mt-[-20px]"
+      >
         Empty
       </div>
-      <AtomButton primay class="mt-4">
+      <AtomButton primay class="mt-10">
         <router-link to="/">Go Home</router-link>
       </AtomButton>
     </main>
