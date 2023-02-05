@@ -1,14 +1,15 @@
 import { describe, it } from "vitest";
 import "@testing-library/jest-dom";
-import { fireEvent, render, waitFor } from "@testing-library/vue";
+import { fireEvent, render } from "@testing-library/vue";
 import { setActivePinia, createPinia } from "pinia";
 import HomeView from "@/views/HomeView.vue";
+import BookstoreView from "@/views/BookstoreView.vue";
 
 describe("suite App", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
-  describe("suite App", () => {
+  describe("suite Home", () => {
     it("should render title of page", () => {
       const { getByText } = render(HomeView);
       getByText(/a story./i);
@@ -24,6 +25,13 @@ describe("suite App", () => {
       const button = getByText("Generate a story");
 
       await fireEvent.click(button);
+    });
+  });
+  describe("suite BookstoreView", () => {
+    it("should render title of page", () => {
+      const { getByText } = render(BookstoreView);
+      getByText("bookstore");
+      getByText("Go Home");
     });
   });
 });
