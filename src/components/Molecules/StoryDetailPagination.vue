@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 
 const props = defineProps({
@@ -65,7 +65,7 @@ const previous = computed(() => {
   } else return `/bookstore/${Number(router.params.id)}`;
 });
 const next = computed(() => {
-  if (props.totalPages && Number(router.params.id) < props.totalPages) {
+  if (props.totalPages && Number(router.params.id) <= props.totalPages - 1) {
     emits("page-changed", Number(router.params.id) + 1);
     return `/bookstore/${Number(router.params.id) + 1}`;
   } else return `/bookstore/${Number(router.params.id)}`;
