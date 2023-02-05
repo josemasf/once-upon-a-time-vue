@@ -1,8 +1,8 @@
 import { rest } from "msw";
 
 const handlers = [
-  rest.get(`https://api.cohere.ai/generate`, (req, res, context) => {
-    console.log("aaaa");
+  rest.post(`http://localhost:3000/api/generate`, (req, res, context) => {
+    console.log("aa");
     return res(
       context.status(200),
       context.json({

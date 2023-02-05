@@ -1,5 +1,5 @@
 const COHERE_API_KEY = import.meta.env.VITE_COHERE_API_KEY;
-const COHERE_API_GENERATE_URL = "https://api.cohere.ai/generate";
+const COHERE_API_GENERATE_URL = `${import.meta.env.VITE_COHERE_URL}/generate`;
 
 export async function storyGenerator(
   input = "I want a story about a dragon, a girl and a dog in japan "

@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, it } from "vitest";
 import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/vue";
+import { fireEvent, render, waitFor } from "@testing-library/vue";
 import { setActivePinia, createPinia } from "pinia";
 import HomeView from "@/views/HomeView.vue";
 
