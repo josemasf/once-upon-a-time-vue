@@ -23,6 +23,17 @@ Finally you can access the history of stories
 
 https://once-upon-a-time-jmsf.netlify.app/
 
+## Usage
+
+Add api key cohere.
+
+```js
+//.env
+
+VITE_COHERE_API_KEY=******
+```
+
+
 ## :sparkles: Authors
 
 [José María Santos](https://josemariasantos.com/)
