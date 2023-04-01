@@ -39,7 +39,7 @@ const handleClick = async () => {
   });
 
   const text =
-    "I want a story that starts with once upon a time about " +
+    "I want a story in spanish that starts with once upon a time about " +
     characters +
     places;
 
