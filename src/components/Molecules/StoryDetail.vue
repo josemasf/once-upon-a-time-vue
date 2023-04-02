@@ -46,13 +46,14 @@
     :total-pages="totalStories"
     @page-changed="pageChangedHandler"
   />
+  <AtomSpeech :text="theStory" :key="id"></AtomSpeech>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import type { Story } from "@/types";
 import { useMainStore } from "@/store";
-import { StoryDetailPagination } from "@/components";
+import { StoryDetailPagination, AtomSpeech } from "@/components";
 import { useRoute } from "vue-router";
 
 import { titleGenerator } from "@/services/ai";
@@ -103,6 +104,10 @@ const createTitle = async () => {
 
   mainStore.setStories(Number(router.params.id), story);
 };
+
+const theStory = computed(() =>
+  story.story.replace("<p>", "").replace("</p>", "")
+);
 </script>
 
 <style scoped>
