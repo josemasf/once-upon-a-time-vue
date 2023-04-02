@@ -62,3 +62,12 @@ export async function titleGenerator(input: string) {
 
   return data.choices[0].text ?? "No title";
 }
+
+export async function imageGenerator(input: string) {
+  const response = await openai.createImage({
+    prompt: `${input}`,
+    n: 1,
+    size: "1024x1024",
+  });
+  return response.data.data[0].url;
+}

@@ -19,6 +19,8 @@
         </div>
       </a>
 
+      <img :src="img" />
+
       <div
         class="mb-3 font-normal text-gray-700 dark:text-gray-400 content-story"
         v-html="story.story"
@@ -56,7 +58,7 @@ import { useMainStore } from "@/store";
 import { StoryDetailPagination, AtomSpeech } from "@/components";
 import { useRoute } from "vue-router";
 
-import { titleGenerator } from "@/services/ai";
+import { titleGenerator, imageGenerator } from "@/services/ai";
 
 const story: Story = reactive({
   story: "",
@@ -69,6 +71,7 @@ const router = useRoute();
 
 const id = computed(() => Number(router.params.id));
 const totalStories = ref();
+const img = ref();
 const currentPage = ref(id.value + 1);
 
 const mainStore = useMainStore();
@@ -92,7 +95,10 @@ const setStory = (id: number) => {
   story.items = response.items;
   story.title = response.title;
 
-  if (!story.title) createTitle();
+  if (!story.title) {
+    createTitle();
+    createImage();
+  }
 };
 const pageChangedHandler = (payload: number) => {
   currentPage.value = payload;
@@ -103,6 +109,17 @@ const createTitle = async () => {
   );
 
   mainStore.setStories(Number(router.params.id), story);
+};
+const createImage = async () => {
+  const { characters, locations, items } = story;
+
+  let propomt = "";
+
+  characters.forEach((character) => (propomt += " " + character.name));
+  locations.forEach((location) => (propomt += " " + location.name));
+  items.forEach((item) => (propomt += " " + item.name));
+
+  img.value = await imageGenerator(propomt);
 };
 
 const theStory = computed(() =>
