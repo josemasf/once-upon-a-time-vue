@@ -25,14 +25,13 @@ https://once-upon-a-time-jmsf.netlify.app/
 
 ## Usage
 
-Add api key cohere.
+Add openai api key.
 
 ```js
 //.env
 
-VITE_COHERE_API_KEY=******
+VITE_OPENAI_API_KEY=******
 ```
-
 
 ## :sparkles: Authors
 

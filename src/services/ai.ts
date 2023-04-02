@@ -1,40 +1,38 @@
-const COHERE_API_KEY = import.meta.env.VITE_COHERE_API_KEY;
-const COHERE_API_GENERATE_URL = `${import.meta.env.VITE_COHERE_URL}/generate`;
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+  apiKey: OPENAI_API_KEY,
+});
+
+const openai = new OpenAIApi(configuration);
 
 export async function storyGenerator(
   input = "I want a story about a dragon, a girl and a dog in japan "
 ) {
-  const data = {
-    model: "command-medium-nightly",
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
     prompt: `${input}`,
-    max_tokens: 1400,
-    temperature: 1.3,
-    k: 0,
-    p: 0.75,
+    temperature: 0.85,
+    max_tokens: 1211,
+    top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    stop_sequences: [],
-    return_likelihoods: "NONE",
-  };
+  });
 
-  const response = await fetch(COHERE_API_GENERATE_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `BEARER ${COHERE_API_KEY}`,
-      "Content-Type": "application/json",
-      "Cohere-Version": "2022-12-06",
-    },
-    body: JSON.stringify(data),
-  }).then((res) => res.json());
+  console.log(response);
+  const { data } = response;
 
-  const { text } = response.generations[0];
+  const text = data.choices[0].text ?? "";
+
+  console.log(text, "text");
 
   return formatStory(text);
 }
 
 function formatStory(text: string) {
   const textFormat = text
-    .slice(text.search(/once/i), text.length)
     .replaceAll("\n\n", "\n")
     .replaceAll("\n", "---")
     .replace("---", "");
@@ -49,30 +47,18 @@ function formatStory(text: string) {
 }
 
 export async function titleGenerator(input: string) {
-  const data = {
-    model: "command-xlarge-20221108",
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
     prompt: `${input}`,
-    max_tokens: 300,
-    temperature: 0.9,
-    k: 0,
-    p: 0.75,
+    temperature: 0.85,
+    max_tokens: 1211,
+    top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    stop_sequences: [],
-    return_likelihoods: "NONE",
-  };
+  });
 
-  const response = await fetch(COHERE_API_GENERATE_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `BEARER ${COHERE_API_KEY}`,
-      "Content-Type": "application/json",
-      "Cohere-Version": "2022-12-06",
-    },
-    body: JSON.stringify(data),
-  }).then((res) => res.json());
+  console.log(response);
+  const { data } = response;
 
-  const { text } = response.generations[0];
-
-  return text.replaceAll('"', "");
+  return data.choices[0].text ?? "No title";
 }

@@ -1,4 +1,4 @@
-import { describe, it } from "vitest";
+import { beforeEach, describe, it } from "vitest";
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/vue";
 import { setActivePinia, createPinia } from "pinia";
