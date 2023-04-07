@@ -1,6 +1,6 @@
 <template>
   <AtomButton is-button-oompa>
-    Our Oompa Loompas are creating an amazing story...
+    {{ $t("oompaLoopasCreating") }}
     <OompaIcon />
   </AtomButton>
 </template>

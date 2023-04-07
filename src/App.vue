@@ -68,7 +68,7 @@ onMounted(() => {
           class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
           >Once upon a time</span
         >
-        a story.
+        {{ $t("aStory") }}
       </a>
     </h1>
     <div class="wrapper">
@@ -77,12 +77,12 @@ onMounted(() => {
           <li
             class="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active"
           >
-            <RouterLink to="/">Generator</RouterLink>
+            <RouterLink to="/">{{ $t("generator") }}</RouterLink>
           </li>
           <li
             class="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer"
           >
-            <RouterLink to="/bookstore">Story Bookstore</RouterLink>
+            <RouterLink to="/bookstore">{{ $t("storyBookstore") }}</RouterLink>
           </li>
           <li>
             <button

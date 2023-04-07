@@ -1,3 +1,14 @@
 {
-  "generateStory": "Sortu istorio bat"
+  "generateStory": "Sortu istorio bat",
+  "oompaLoopasCreating": "Gure Oompa Loompak istorio harrigarri bat sortzen ari dira...",
+  "generator": "Sorgailua",
+  "storyBookstore": "Ipuin Liburudenda",
+  "aStory": "istorio bat.",
+  "bookstore": "Liburudenda",
+  "goHome": "Etxera",
+  "empty": "Hutsik",
+  "places": "Lekuak",
+  "characters": "Pertsonaiak",
+  "items": "Elementuak",
+  "readMore": "Irakurri gehiago"
 }

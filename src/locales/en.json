@@ -1,3 +1,14 @@
 {
-  "generateStory": "Generate a story"
+  "generateStory": "Generate a story",
+  "oompaLoopasCreating": "Our Oompa Loompas are creating an amazing story...",
+  "aStory": "a story.",
+  "generator": "Generator",
+  "storyBookstore": "Story Bookstore",
+  "bookstore": "Bookstore",
+  "goHome": "Go Home",
+  "empty": "Empty",
+  "characters": "Characters",
+  "items": "Items",
+  "places": "Places",
+  "readMore": "Read more"
 }

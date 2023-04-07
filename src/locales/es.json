@@ -1,3 +1,14 @@
 {
-  "generateStory": "Generar una historia"
+  "generateStory": "Generar una historia",
+  "oompaLoopasCreating": "Nuestros Oompa Loompas están creando una historia increíble...",
+  "generator": "Generador",
+  "storyBookstore": "Librería de cuentos",
+  "aStory": "una historia.",
+  "bookstore": "Librería",
+  "goHome": "Vete a casa",
+  "empty": "Vacío",
+  "places": "Lugares",
+  "characters": "Caracteres",
+  "items": "Elementos",
+  "readMore": "Leer más"
 }

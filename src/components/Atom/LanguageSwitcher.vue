@@ -92,7 +92,7 @@ const languageOptions = [
 ];
 
 function changeLanguage(payload: any) {
-  locale.value = payload.code;
+  locale.value = payload.code === "es-pv" ? "eu" : payload.code;
   showOptions.value = false;
 
   const { code, flag, language } = payload;

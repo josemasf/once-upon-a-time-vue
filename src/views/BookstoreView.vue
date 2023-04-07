@@ -13,9 +13,9 @@ const mainStore = useMainStore();
       >
         <span
           class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
-          >Story</span
+          >{{ $t("bookstore") }}</span
         >
-        bookstore.
+        .
       </h1>
     </div>
     <BookstoreContainer v-if="mainStore.getStories().value.length > 0" />
@@ -26,15 +26,15 @@ const mainStore = useMainStore();
       <h1
         class="text-5xl md:text-9xl font-extrabold text-white tracking-widest"
       >
-        bookstore
+        {{ $t("bookstore") }}
       </h1>
       <div
         class="bg-[#FF6A3D] px-2 text-xl md:text-3xl rounded rotate-12 absolute mt-[-20px]"
       >
-        Empty
+        {{ $t("empty") }}
       </div>
       <AtomButton primay class="mt-10">
-        <router-link to="/">Go Home</router-link>
+        <router-link to="/">{{ $t("goHome") }}</router-link>
       </AtomButton>
     </main>
   </div>

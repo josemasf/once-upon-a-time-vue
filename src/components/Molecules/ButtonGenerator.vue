@@ -11,13 +11,8 @@
 import { ref } from "vue";
 import { storyGenerator } from "@/services/ai";
 import { ButtonOompa, AtomButton } from "@/components";
-import { useI18n } from "vue-i18n";
-import { useMainStore } from "@/store";
 
-const { t } = useI18n({
-  inheritLocale: true,
-  useScope: "global",
-});
+import { useMainStore } from "@/store";
 
 const emit = defineEmits(["new-story"]);
 

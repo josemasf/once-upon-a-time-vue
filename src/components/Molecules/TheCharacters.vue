@@ -1,5 +1,5 @@
 <template>
-  <SelectableContainer :title="'Characters'">
+  <SelectableContainer :title="$t('characters')">
     <AtomAvatar
       :src="`/imgs/${character.name}.webp`"
       :alt="character.name"
