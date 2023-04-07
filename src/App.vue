@@ -2,6 +2,7 @@
 import { computed, onMounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import router from "@/router";
+import LanguageSwitcher from "./components/Atom/LanguageSwitcher.vue";
 
 const isHome = computed(() => router.currentRoute.value.name === "home");
 onMounted(() => {
@@ -115,6 +116,9 @@ onMounted(() => {
                 ></path>
               </svg>
             </button>
+          </li>
+          <li>
+            <LanguageSwitcher />
           </li>
         </ul>
       </nav>

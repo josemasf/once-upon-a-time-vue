@@ -21,12 +21,9 @@ export async function storyGenerator(
     presence_penalty: 0,
   });
 
-  console.log(response);
   const { data } = response;
 
   const text = data.choices[0].text ?? "";
-
-  console.log(text, "text");
 
   return formatStory(text);
 }
@@ -51,13 +48,12 @@ export async function titleGenerator(input: string) {
     model: "text-davinci-003",
     prompt: `${input}`,
     temperature: 0.85,
-    max_tokens: 1211,
+    max_tokens: 750,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
   });
 
-  console.log(response);
   const { data } = response;
 
   return data.choices[0].text ?? "No title";

@@ -27,7 +27,6 @@ export async function getTTS() {
     .then((response) => {
       const audio = new Audio(response);
       audio.play();
-      console.log(response);
     })
     .catch((err) => console.error(err));
 }

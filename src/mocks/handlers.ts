@@ -2,7 +2,6 @@ import { rest } from "msw";
 
 const handlers = [
   rest.post(`http://localhost:3000/api/generate`, (req, res, context) => {
-    console.log("aa");
     return res(
       context.status(200),
       context.json({
