@@ -1,7 +1,7 @@
 <template>
   <div>
     <AtomButton @click.once="handleClick" v-if="!isLoading">
-      Generate a story
+      {{ $t("generateStory") }}
     </AtomButton>
     <ButtonOompa v-else />
   </div>
@@ -11,8 +11,13 @@
 import { ref } from "vue";
 import { storyGenerator } from "@/services/ai";
 import { ButtonOompa, AtomButton } from "@/components";
-
+import { useI18n } from "vue-i18n";
 import { useMainStore } from "@/store";
+
+const { t } = useI18n({
+  inheritLocale: true,
+  useScope: "global",
+});
 
 const emit = defineEmits(["new-story"]);
 

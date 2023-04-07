@@ -91,12 +91,15 @@ const languageOptions = [
   { language: "Basque", flag: euskadiFlag, code: "es-pv" },
 ];
 
-function changeLanguage(language: any) {
-  locale.value = language.code;
+function changeLanguage(payload: any) {
+  locale.value = payload.code;
   showOptions.value = false;
 
-  selectedLanguage.code = language.code;
-  selectedLanguage.flag = language.flag;
-  selectedLanguage.language = language.language;
+  const { code, flag, language } = payload;
+
+  selectedLanguage.code = code === "es-pv" ? "eu" : code;
+  console.log(selectedLanguage.code, "selectedLanguage.code");
+  selectedLanguage.flag = flag;
+  selectedLanguage.language = language;
 }
 </script>
