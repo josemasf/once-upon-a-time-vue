@@ -12,7 +12,7 @@ import { ref } from "vue";
 import { storyGenerator } from "@/services/ai";
 import { ButtonOompa, AtomButton } from "@/components";
 
-import { useMainStore } from "@/store";
+import { useMainStore, usePersonalSettingStore } from "@/store";
 
 const emit = defineEmits(["new-story"]);
 
@@ -20,6 +20,7 @@ const isLoading = ref(false);
 const isGenerating = ref(false);
 
 const mainStore = useMainStore();
+const psStore = usePersonalSettingStore();
 
 const handleClick = async () => {
   let characters = "";
@@ -38,10 +39,7 @@ const handleClick = async () => {
     places += ` and in the story someone have a ${items.name} `;
   });
 
-  const text =
-    "I want a story in spanish that starts with once upon a time about " +
-    characters +
-    places;
+  const text = `I want a story in ${psStore.personalSetting.englishLanguage} that starts with once upon a time about  ${characters} ${places}`;
 
   isLoading.value = true;
 

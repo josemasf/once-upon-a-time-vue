@@ -112,3 +112,51 @@ export const useMainStore = defineStore("main", () => {
     setStories,
   };
 });
+
+export const usePersonalSettingStore = defineStore("personalSetting", () => {
+  const personalSetting = reactive(
+    useStorage("personalSetting", {
+      language: "",
+      flag: "",
+      isoCode: "",
+      englishLanguage: "",
+    })
+  );
+
+  const setPersonalSetting = (personal: {
+    language: string;
+    code: string;
+    flag: string;
+    languageEnglish: string;
+  }) => {
+    const isoCode = parseIso(personal.code);
+
+    personalSetting.value.language = personal.language;
+    personalSetting.value.flag = personal.flag;
+    personalSetting.value.isoCode = isoCode;
+    personalSetting.value.englishLanguage = personal.languageEnglish;
+  };
+
+  const parseIso = (code: string) => {
+    let codeParsed = "";
+    switch (code) {
+      case "es-pv":
+        codeParsed = "eu";
+        break;
+      case "es-ct":
+        codeParsed = "ca";
+        break;
+      case "es-gl":
+        codeParsed = "gl";
+        break;
+      default:
+        codeParsed = code;
+    }
+    return codeParsed;
+  };
+
+  return {
+    personalSetting,
+    setPersonalSetting,
+  };
+});

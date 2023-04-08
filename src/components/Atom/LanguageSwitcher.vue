@@ -67,9 +67,15 @@ import spainFlag from "@/assets/flags/4x3/es.svg";
 import ukFlag from "@/assets/flags/4x3/gb.svg";
 import franceFlag from "@/assets/flags/4x3/fr.svg";
 import euskadiFlag from "@/assets/flags/4x3/es-pv.svg";
+import catalanFlag from "@/assets/flags/4x3/es-ct.svg";
+import galicianFlag from "@/assets/flags/4x3/es-ga.svg";
 
 import { useI18n } from "vue-i18n";
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
+
+import { usePersonalSettingStore } from "@/store";
+
+const psStore = usePersonalSettingStore();
 
 const { locale } = useI18n({
   inheritLocale: true,
@@ -79,27 +85,61 @@ const { locale } = useI18n({
 const showOptions = ref(false);
 
 const selectedLanguage = reactive({
-  language: "English",
-  flag: ukFlag,
-  code: "en",
+  language: psStore.personalSetting.isoCode || "English",
+  flag: psStore.personalSetting.flag || ukFlag,
+  code: psStore.personalSetting.language || "en",
 });
 
 const languageOptions = [
-  { language: "Spanish", flag: spainFlag, code: "es" },
-  { language: "English", flag: ukFlag, code: "en" },
-  { language: "French", flag: franceFlag, code: "fr" },
-  { language: "Basque", flag: euskadiFlag, code: "es-pv" },
+  {
+    languageEnglish: "Spanish",
+    language: "Español",
+    flag: spainFlag,
+    code: "es",
+  },
+  { languageEnglish: "English", language: "English", flag: ukFlag, code: "en" },
+  {
+    languageEnglish: "French",
+    language: "Français",
+    flag: franceFlag,
+    code: "fr",
+  },
+  {
+    languageEnglish: "Basque",
+    language: "Euskara",
+    flag: euskadiFlag,
+    code: "es-pv",
+  },
+  {
+    languageEnglish: "Galician",
+    language: "Galego",
+    flag: galicianFlag,
+    code: "es-gl",
+  },
+  {
+    languageEnglish: "Catalan",
+    language: "Català",
+    flag: catalanFlag,
+    code: "es-ct",
+  },
 ];
 
+onMounted(() => {
+  locale.value = psStore.personalSetting.isoCode;
+});
+
 function changeLanguage(payload: any) {
-  locale.value = payload.code === "es-pv" ? "eu" : payload.code;
+  const { code, flag, language, languageEnglish } = payload;
+
+  psStore.setPersonalSetting({ code, language, languageEnglish, flag });
+
+  psStore.personalSetting;
+
+  locale.value = psStore.personalSetting.isoCode;
   showOptions.value = false;
 
-  const { code, flag, language } = payload;
-
-  selectedLanguage.code = code === "es-pv" ? "eu" : code;
-  console.log(selectedLanguage.code, "selectedLanguage.code");
-  selectedLanguage.flag = flag;
-  selectedLanguage.language = language;
+  selectedLanguage.code = psStore.personalSetting.isoCode;
+  selectedLanguage.flag = psStore.personalSetting.flag;
+  selectedLanguage.language = psStore.personalSetting.language;
 }
 </script>
