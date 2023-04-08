@@ -69,6 +69,9 @@ import franceFlag from "@/assets/flags/4x3/fr.svg";
 import euskadiFlag from "@/assets/flags/4x3/es-pv.svg";
 import catalanFlag from "@/assets/flags/4x3/es-ct.svg";
 import galicianFlag from "@/assets/flags/4x3/es-ga.svg";
+import portualFlag from "@/assets/flags/4x3/pt.svg";
+import italianFlag from "@/assets/flags/4x3/it.svg";
+import germanFlag from "@/assets/flags/4x3/de.svg";
 
 import { useI18n } from "vue-i18n";
 import { onMounted, reactive, ref } from "vue";
@@ -104,6 +107,25 @@ const languageOptions = [
     flag: franceFlag,
     code: "fr",
   },
+  {
+    languageEnglish: "Portuguese",
+    language: "Português",
+    flag: portualFlag,
+    code: "pt",
+  },
+  {
+    languageEnglish: "German",
+    language: "Deutsch",
+    flag: germanFlag,
+    code: "de",
+  },
+  {
+    languageEnglish: "Italian",
+    language: "Italiano",
+    flag: italianFlag,
+    code: "it",
+  },
+
   {
     languageEnglish: "Basque",
     language: "Euskara",
