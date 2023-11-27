@@ -5,7 +5,7 @@ export async function storyGenerator(
   input = "I want a story about a dragon, a girl and a dog in japan "
 ) {
   const data = {
-    model: "command-medium-nightly",
+    //model: "command-medium-nightly",
     prompt: `${input}`,
     max_tokens: 1400,
     temperature: 1.3,
@@ -50,8 +50,14 @@ function formatStory(text: string) {
 
 export async function titleGenerator(input: string) {
   const data = {
-    model: "command-xlarge-20221108",
-    prompt: `${input}`,
+    // model: "command-light",
+    prompt: `
+    Suggest a title for the following history.
+
+    The tone of the title is: Enjoyable
+    The history: "${input}"
+    title:
+    `,
     max_tokens: 300,
     temperature: 0.9,
     k: 0,

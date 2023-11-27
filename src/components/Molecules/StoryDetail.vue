@@ -98,7 +98,7 @@ const pageChangedHandler = (payload: number) => {
 };
 const createTitle = async () => {
   story.title = await titleGenerator(
-    `give me a short title for this story " ${story.story}"`
+    `give me a short title with a maximum 8 words for this story " ${story.story}"`
   );
 
   mainStore.setStories(Number(router.params.id), story);
