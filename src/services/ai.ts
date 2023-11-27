@@ -1,18 +1,17 @@
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true,
 });
-
-const openai = new OpenAIApi(configuration);
 
 export async function storyGenerator(
   input = "I want a story about a dragon, a girl and a dog in japan "
 ) {
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
+  const response = await openai.completions.create({
+    model: "gpt-3.5-turbo",
     prompt: `${input}`,
     temperature: 0.85,
     max_tokens: 1211,
@@ -21,9 +20,7 @@ export async function storyGenerator(
     presence_penalty: 0,
   });
 
-  const { data } = response;
-
-  const text = data.choices[0].text ?? "";
+  const text = response.choices[0].text ?? "";
 
   return formatStory(text);
 }
@@ -44,8 +41,8 @@ function formatStory(text: string) {
 }
 
 export async function titleGenerator(input: string) {
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
+  const response = await openai.completions.create({
+    model: "gpt-3.5-turbo",
     prompt: `${input}`,
     temperature: 0.85,
     max_tokens: 750,
@@ -54,16 +51,14 @@ export async function titleGenerator(input: string) {
     presence_penalty: 0,
   });
 
-  const { data } = response;
-
-  return data.choices[0].text ?? "No title";
+  return response.choices[0].text ?? "No title";
 }
 
 export async function imageGenerator(input: string) {
-  const response = await openai.createImage({
+  const response = await openai.images.generate({
     prompt: `${input}`,
     n: 1,
     size: "1024x1024",
   });
-  return response.data.data[0].url;
+  return response.data[0].url;
 }
